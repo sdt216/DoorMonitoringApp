@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val serverSocket: BluetoothServerSocket?
-        var BTAdapter = BluetoothAdapter.getDefaultAdapter()
+        m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         // Phone does not support Bluetooth so let the user know and exit.
-        if (BTAdapter == null) {
+        if (m_bluetoothAdapter == null) {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Not compatible")
                 .setMessage("Your phone does not support Bluetooth")
@@ -42,18 +42,21 @@ class MainActivity : AppCompatActivity() {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
         }
-        if (!BTAdapter.isEnabled) {
-            val enableBT = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            startActivityForResult(enableBT, REQUEST_ENABLE_BLUETOOTH)
-        } else {
-            connectBluetooth?.setOnClickListener {
-                val intentOpenBluetoothSettings = Intent()
-                intentOpenBluetoothSettings.action =
-                    android.provider.Settings.ACTION_BLUETOOTH_SETTINGS
-                startActivity(intentOpenBluetoothSettings)
-            }
+        else {
+            if (m_bluetoothAdapter!!.isEnabled) {
+                val enableBT = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                startActivityForResult(enableBT, REQUEST_ENABLE_BLUETOOTH)
+            } else {
+                connectBluetooth?.setOnClickListener {
+                    val intentOpenBluetoothSettings = Intent()
+                    intentOpenBluetoothSettings.action =
+                        android.provider.Settings.ACTION_BLUETOOTH_SETTINGS
+                    startActivity(intentOpenBluetoothSettings)
+                }
 
+            }
         }
+
     }
 
 
