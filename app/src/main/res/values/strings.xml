@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DoorMonitoringApp</string>
+    <string name="refresh">Refresh Device List</string>
+</resources>
