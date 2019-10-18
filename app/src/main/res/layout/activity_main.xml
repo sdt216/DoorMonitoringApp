@@ -22,7 +22,6 @@
         android:layout_width="145dp"
         android:layout_height="67dp"
         android:layout_marginTop="32dp"
-        android:onClick="Testing"
         android:text="Start Monitoring"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
